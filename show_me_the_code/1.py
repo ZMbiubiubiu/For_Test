@@ -31,5 +31,12 @@ def get_all_codes(num):
     return activation_codes
 
 
+def save_in_file(activation_codes, file='codes.txt'):
+    with open(file, 'w') as f:
+        for item in activation_codes:
+            print(item, end='\n', file=f)
+
+
 if __name__ == "__main__":
-    print(get_all_codes(200))
+    codes = get_all_codes(200)
+    save_in_file(codes)
