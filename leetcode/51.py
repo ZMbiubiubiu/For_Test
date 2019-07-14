@@ -16,13 +16,15 @@ n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并
 
 
 class Solution1:
-    def solveNQueens(self, n: int) -> List[List[str]]:
-        def DFS(queens, pie, na):"""
-            :param queens: queens 存储各个皇后所在的列。皇后的列应该彼此不同
-            :param pie: 皇后所在位置的`撇`的位置也不能存在皇后
-            :param na: 皇后所在位置的`捺`的位置也不能存在皇后
-            :return: 返回所有可能的结果
+    def solveNQueens(self, n: int) -> 'List[List[str]]':
+        def DFS(queens, pie, na):
             """
+                        :param queens: queens 存储各个皇后所在的列。皇后的列应该彼此不同
+                        :param pie: 皇后所在位置的`撇`的位置也不能存在皇后
+                        :param na: 皇后所在位置的`捺`的位置也不能存在皇后
+                        :return: 返回所有可能的结果
+                        """
+
             row = len(queens)
             if row == n:
                 result.append(queens)
@@ -36,10 +38,11 @@ class Solution1:
         # return [['.'*col+'Q'+'.'*(n-col-1) for col in queens] for queens in result]
         return self.generate_checkboard(result, n)
 
-    def generate_checkboard(self, result, n):
-        checkboards = []
-        for i in range(len(result)):  # 构建每一个符合皇后问题的棋谱
-            queens = result[i]
-            checkboard = ['.' * col + 'Q' + '.' * (n - col - 1) for col in queens]
-            checkboards.append(checkboard)
-        return checkboards
+
+def generate_checkboard(self, result, n):
+    checkboards = []
+    for i in range(len(result)):  # 构建每一个符合皇后问题的棋谱
+        queens = result[i]
+        checkboard = ['.' * col + 'Q' + '.' * (n - col - 1) for col in queens]
+        checkboards.append(checkboard)
+    return checkboards
