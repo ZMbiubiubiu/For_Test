@@ -5,7 +5,6 @@
 # @Site    : 
 # @File    : geohash.py
 # @Software: PyCharm
-
 """
 给数据库的表proposal更新geohash字段
 """
@@ -64,11 +63,11 @@ import pymysql
 
 def db():
     connection = pymysql.connect(
-        host='',
+        host='rm-2zeq1de3sv61152354o.mysql.rds.aliyuncs.com',
         port=3306,
         user='root',
-        password='',
-        db='',
+        password='Ctdna1903#10000',
+        db='pinstreet_wxapp',
         charset='utf8'
     )
 
@@ -87,13 +86,13 @@ def db():
             table_id, coordinate = row[0], row[1].split(',')
             coordinate = list(map(float, coordinate))
             geohash = encode(coordinate)
-            print(table_id, coordinate, geohash)
+            print(table_id, type(table_id), coordinate, geohash)
             try:
-                # pass
-                cursor.execute(sql_update, args=(geohash, int(table_id)))
-            except Exception:
+                cursor.execute(sql_update, args=(geohash, table_id))
+            except Exception as e:
                 print('update failed')
-                raise ('update failed')
+                raise e
+            connection.commit()
     except Exception as e:
         connection.rollback()
     finally:

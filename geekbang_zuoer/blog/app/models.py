@@ -6,6 +6,7 @@
 # @File    : models.py
 # @Software: PyCharm
 from datetime import datetime
+from hashlib import md5
 from flask_login import UserMixin
 
 from app import db
@@ -18,7 +19,13 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)  # 不要写成utcnow() 函数调用形式
     post = db.relationship('Post', backref='author', lazy='dynamic')
+
+    def avatar(self, size):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 
     def __repr__(self):
         return f'<User {self.username}>'
