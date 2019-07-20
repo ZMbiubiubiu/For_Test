@@ -13,3 +13,4 @@ class Config:
                               'mysql+cymysql://root:mingyue6868@localhost:3306/blog?charset=utf8mb4'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'ksjdflasjdflksaj'
+    POSTS_PER_PAGE = 25
